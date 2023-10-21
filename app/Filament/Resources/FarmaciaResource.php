@@ -69,7 +69,8 @@ class FarmaciaResource extends Resource
                     ->directory('receitas_medicas')
                     ->downloadable()
                     ->previewable(true)
-                    ->acceptedFileTypes(['application/pdf']),
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->preserveFilenames(),
                 Forms\Components\Select::make('vacina_covid_19')
                     ->options([
                         'Vacina Pfizer'         => 'Vacina Pfizer',

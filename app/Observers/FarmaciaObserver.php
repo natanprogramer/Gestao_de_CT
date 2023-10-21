@@ -35,13 +35,12 @@ class FarmaciaObserver
     {
         Notification::make()
             ->warning()
-            ->title('Olá. A ficha do paciente ' . $farmacia->paciente['primeiro_nome'] .' '. $farmacia->paciente['sobrenome'].' foi atualizada')
-            ->body('A ficha do ' . $farmacia->paciente['primeiro_nome'] .' '. $farmacia->paciente['sobrenome'].' foram atualizadas')
+            ->title('Olá. A ficha do paciente ' . $farmacia->paciente['primeiro_nome'] .' '. $farmacia->paciente['sobrenome'].' foi atualizada. Departamento Farmácia')
             ->body('Para saber mais click no butão')
             ->actions([
                 Action::make('Saiba mais')
                 ->button()
-                ->url(route('filament.admin.resources.farmacias.view' , $farmacia->id))
+                ->url(route('filament.admin.resources.farmacia.view' , $farmacia))
             ])
                 ->sendToDatabase(User::all());
     }

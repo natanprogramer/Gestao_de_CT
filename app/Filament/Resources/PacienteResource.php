@@ -29,7 +29,7 @@ class PacienteResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-plus';
 
-    protected static ?string $navigationGroup = 'Instituição';
+    protected static ?string $navigationGroup = 'Cadastro';
 
     protected static ?string $slug = 'pacientes';
 

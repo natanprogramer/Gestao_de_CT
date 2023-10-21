@@ -22,7 +22,7 @@ class CheckListResource extends Resource
 
     protected static ?string $pluralModelLabel = 'CheckList';
 
-    protected static ?string $navigationGroup = 'Instituição';
+    protected static ?string $navigationGroup = 'Cadastro';
 
     protected static ?string $slug = 'checklist';
 
