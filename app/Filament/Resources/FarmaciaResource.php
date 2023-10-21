@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\FarmaciaResource\Pages;
 use App\Filament\Resources\FarmaciaResource\RelationManagers;
+use App\Models\Paciente;
 use App\Models\Farmacia;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,8 +13,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Models\Paciente;
-use App\Models\User;
 
 class FarmaciaResource extends Resource
 {
@@ -21,10 +20,19 @@ class FarmaciaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
+    protected static ?string $pluralModelLabel = 'Farmácia';
+
+    protected static ?string $navigationGroup = 'Saúde';
+
+    protected static ?string $slug = 'farmacia';
+
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+
                 Forms\Components\Select::make('paciente_id')
                     ->label('Nome do paciente')
                     ->placeholder('selecione o paciente')
@@ -46,40 +54,22 @@ class FarmaciaResource extends Resource
                 Forms\Components\RichEditor::make('posologia')
                     ->columnSpanFull()
                     ->required(),
-                Forms\Components\Select::make('quantidade_entregue_pela_farmacia')
-                    ->placeholder('Selecione a quantidade de remedio')
-                    ->label('Quantidade entregue pela farmácia')
-                    ->options([
-                        '0'                     =>  '0',
-                        '1'                     =>  '1',
-                        '2'                     =>  '2',
-                        '3'                     =>  '3',
-                        '4'                     =>  '4',
-                        '5'                     =>  '5',
-                        '6'                     =>  '6',
-                        '7'                     =>  '7',
-                        '8'                     =>  '8',
-                        '9'                     =>  '9',
-                        '10'                    =>  '10',
-                        'Mais de dez'           =>  'Mais de dez',
-
-                        ])
-                    ->required(),
                 Forms\Components\CheckboxList::make('paciente_possui_alergia')
                     ->options([
                         'Sim'   =>  'Sim',
                         'Não'   =>  'Não',
                     ])
                     ->required(),
-                Forms\Components\DateTimePicker::make('tempo_de_recusa')
-                    ->required(),
-                Forms\Components\TextInput::make('medicacao_recusa')
-                    ->label('Medicação recusa')
+                Forms\Components\Textarea::make('qual_alergia')
+                    ->label('Se o paciente possui alergia, diga-nos quais são')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(65535),
                 Forms\Components\FileUpload::make('upload_receita_medica')
                     ->disk('public')
-                    ->directory('receitas_medicas'),
+                    ->directory('receitas_medicas')
+                    ->downloadable()
+                    ->previewable(true)
+                    ->acceptedFileTypes(['application/pdf']),
                 Forms\Components\Select::make('vacina_covid_19')
                     ->options([
                         'Vacina Pfizer'         => 'Vacina Pfizer',
@@ -100,24 +90,24 @@ class FarmaciaResource extends Resource
                     ->placeholder('Selecione as vacinas')
                     ->required(),
                 Forms\Components\Select::make('quantas_doses')
-                ->placeholder('Selecione a quantidade de doses')
-                ->label('Quantidade de doses')
-                ->options([
-                    '0'                     =>  '0',
-                    '1'                     =>  '1',
-                    '2'                     =>  '2',
-                    '3'                     =>  '3',
-                    '4'                     =>  '4',
-                    '5'                     =>  '5',
-                    '6'                     =>  '6',
-                    '7'                     =>  '7',
-                    '8'                     =>  '8',
-                    '9'                     =>  '9',
-                    '10'                    =>  '10',
-                    'Mais de dez'           =>  'Mais de dez',
+                    ->placeholder('Selecione a quantidade de doses')
+                    ->label('Quantidade de doses')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
 
-                    ])
-                ->required(),
+                        ])
+                    ->required(),
                 Forms\Components\RichEditor::make('observacao')
                     ->label('Observações')
                     ->required()
@@ -134,20 +124,29 @@ class FarmaciaResource extends Resource
                     ->label('Avatar')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('paciente.primeiro_nome')
+                    ->searchable()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('user.name')
+                Tables\Columns\TextColumn::make('user.name')
                     ->label('Profissional')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('nome_da_medicacao')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('paciente_possui_alergia')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('upload_receita_medica')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('vacina_covid_19')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('quantas_doses')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Criado em')
-                    ->dateTime('d/m/Y h:i:s')
+                    ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Atualizado em')
-                    ->dateTime('d/m/Y h:i:s')
+                    ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

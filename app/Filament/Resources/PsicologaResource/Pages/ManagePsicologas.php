@@ -17,4 +17,8 @@ class ManagePsicologas extends ManageRecords
             ->label('Novo Atendimento'),
         ];
     }
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

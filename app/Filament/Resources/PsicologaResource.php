@@ -20,6 +20,14 @@ class PsicologaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
+    protected static ?string $pluralModelLabel = 'Psicologia';
+
+    protected static ?string $navigationGroup = 'Saúde';
+
+    protected static ?string $slug = 'psicologia';
+
+
+
 
 
     public static function form(Form $form): Form

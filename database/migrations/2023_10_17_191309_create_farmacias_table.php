@@ -19,10 +19,8 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->string('nome_da_medicacao');
             $table->text('posologia');
-            $table->string('quantidade_entregue_pela_farmacia');
             $table->string('paciente_possui_alergia');
-            $table->dateTime('tempo_de_recusa');
-            $table->string('medicacao_recusa');
+            $table->text('qual_alergia')->nullable();
             $table->string('upload_receita_medica')->nullable();
             $table->string('vacina_covid_19');
             $table->string('quantas_doses');

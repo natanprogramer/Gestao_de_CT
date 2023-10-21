@@ -12,12 +12,22 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static ?string $pluralModelLabel = 'Funcionários';
+
+    protected static ?string $navigationGroup = 'Equipe';
+
+    protected static ?string $slug = 'equipe';
+
 
     public static function form(Form $form): Form
     {
@@ -31,12 +41,22 @@ class UserResource extends Resource
                     ->label('E-Mail')
                     ->email()
                     ->required()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\TextInput::make('password')
                     ->label('Senha')
+                    ->dehydrateStateUsing(fn($state)    =>  Hash::make($state))
+                    ->dehydrated(fn($state) =>  filled($state))
                     ->password()
-                    ->required()
+                    ->required(fn(string $context): bool    =>  $context === 'create')
                     ->maxLength(255),
+                    Forms\Components\Select::make('Roles')
+                    ->multiple()
+                    ->relationship('roles', 'name' , fn(Builder $query) =>
+                        auth()->user()->hasRole('Administrador') ? null : $query->where('name' , '!=' , 'Administrador')
+                    )
+                    ->multiple()
+                    ->preload(),
             ]);
     }
 
@@ -76,5 +96,13 @@ class UserResource extends Resource
         return [
             'index' => Pages\ManageUsers::route('/'),
         ];
+    }
+    public static function getEloquentQuery(): Builder
+    {
+
+            return auth()->user()->hasRole('Administrador')
+            ? parent::getEloquentQuery()
+            : parent::getEloquentQuery()->whereHas( 'roles', fn (Builder $query)  => $query->where('name', '!=', 'Administrador')
+        );
     }
 }

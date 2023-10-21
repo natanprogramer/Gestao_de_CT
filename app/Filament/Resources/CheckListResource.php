@@ -20,6 +20,13 @@ class CheckListResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-check';
 
+    protected static ?string $pluralModelLabel = 'CheckList';
+
+    protected static ?string $navigationGroup = 'Instituição';
+
+    protected static ?string $slug = 'checklist';
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -31,6 +38,7 @@ class CheckListResource extends Resource
                     ->searchable()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('calcas')
+                    ->label('Calças')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('bermudas_shorts')
@@ -119,61 +127,9 @@ class CheckListResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('paciente_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('paciente.primeiro_nome')
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('calcas')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('bermudas_shorts')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('cuecas')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('pares_de_meia')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('bones')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('conjuntos_de_moleton')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('camisas_camisetas')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('pares_de_tenis')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('toalhas')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('lencois')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('cobertores')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('travesseiros')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('fronhas')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('cadernos')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('canetas')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('caixas_de_sabao_em_po')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('pacote_de_sabao_em_barra')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('amaciantes')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('escova_de_roupa')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sabonetes')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('desodorantes')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('cremes_dental')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('cremes_de_pele')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('prestobarbas')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('shampoo')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('condicionadores')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

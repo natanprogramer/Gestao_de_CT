@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateFarmacia extends CreateRecord
 {
     protected static string $resource = FarmaciaResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

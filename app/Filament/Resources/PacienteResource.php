@@ -29,6 +29,11 @@ class PacienteResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-plus';
 
+    protected static ?string $navigationGroup = 'Instituição';
+
+    protected static ?string $slug = 'pacientes';
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -111,6 +116,7 @@ class PacienteResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('responsavel_pelo_acolhimento')
+                    ->label('Responsável pelo Acolhido')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('telefone_do_responsavel')
@@ -230,7 +236,7 @@ class PacienteResource extends Resource
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 Forms\Components\Select::make('necessidade_especial')
-                    ->label('O paciente existe alguma necessidade especial')
+                    ->label('O paciente tem alguma necessidade especial?')
                     ->placeholder('Escolha uma opção')
                     ->options([
                         'Nenhuma'   =>  'Nenhuma',
