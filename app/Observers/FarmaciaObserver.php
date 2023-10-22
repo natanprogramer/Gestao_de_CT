@@ -50,22 +50,11 @@ class FarmaciaObserver
      */
     public function deleted(Farmacia $farmacia): void
     {
-        //
+        Notification::make()
+            ->warning()
+            ->title('Olá. A ficha do paciente ' . $farmacia->paciente['primeiro_nome'] .' '. $farmacia->paciente['sobrenome'].' foi Excluida. Departamento Farmácia')
+
+            ->sendToDatabase(User::all());
     }
 
-    /**
-     * Handle the Farmacia "restored" event.
-     */
-    public function restored(Farmacia $farmacia): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Farmacia "force deleted" event.
-     */
-    public function forceDeleted(Farmacia $farmacia): void
-    {
-        //
-    }
 }

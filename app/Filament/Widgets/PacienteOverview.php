@@ -45,11 +45,5 @@ class PacienteOverview extends BaseWidget
 
         ];
     }
-    protected function getType(): string
-    {
-        return [
-            'type' => 'line',
 
-        ];
-    }
 }

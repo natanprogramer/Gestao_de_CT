@@ -9,7 +9,7 @@ use Flowframe\Trend\TrendValue;
 
 class PacienteChart extends ChartWidget
 {
-    protected static ?string $heading = 'Estatística Entrada de Pacientes';
+    protected static ?string $heading = 'Estatística: Entrada de Pacientes';
 
     protected static string $color = 'info';
 

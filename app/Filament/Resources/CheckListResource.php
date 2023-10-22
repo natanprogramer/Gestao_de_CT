@@ -26,101 +26,523 @@ class CheckListResource extends Resource
 
     protected static ?string $slug = 'checklist';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('paciente_id')
+                    ->label('Selecione o nome do paciente')
                     ->required()
                     ->relationship('paciente' , 'primeiro_nome')
                     ->preload()
                     ->searchable()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('calcas')
-                    ->label('Calças')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('bermudas_shorts')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('cuecas')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pares_de_meia')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('bones')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('conjuntos_de_moleton')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('camisas_camisetas')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pares_de_tenis')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('toalhas')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('lencois')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('cobertores')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('travesseiros')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('fronhas')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('cadernos')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('canetas')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('caixas_de_sabao_em_po')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pacote_de_sabao_em_barra')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('amaciantes')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('escova_de_roupa')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('sabonetes')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('desodorantes')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('cremes_dental')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('cremes_de_pele')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('prestobarbas')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('shampoo')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('condicionadores')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('observacao_extras')
+                Forms\Components\Select::make('calcas')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de calças')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('bermudas_shorts')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de Bermudas ou Shorts')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('cuecas')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de Cuecas')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('pares_de_meia')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('bones')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de bones')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('conjuntos_de_moleton')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de calças')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('camisas_camisetas')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('pares_de_tenis')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('toalhas')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('lencois')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('cobertores')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('travesseiros')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('fronhas')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('cadernos')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('canetas')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('caixas_de_sabao_em_po')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('pacote_de_sabao_em_barra')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('amaciantes')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de par de meias')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('escova_de_roupa')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de par de meias')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('sabonetes')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de par de meias')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('desodorantes')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de par de meias')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('cremes_dental')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de par de meias')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('cremes_de_pele')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de par de meias')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('prestobarbas')
+                    ->placeholder('Selecione a quantidade')
+                    ->label('Quantidade de par de meias')
+                    ->options([
+                        '0'                     =>  '0',
+                        '1'                     =>  '1',
+                        '2'                     =>  '2',
+                        '3'                     =>  '3',
+                        '4'                     =>  '4',
+                        '5'                     =>  '5',
+                        '6'                     =>  '6',
+                        '7'                     =>  '7',
+                        '8'                     =>  '8',
+                        '9'                     =>  '9',
+                        '10'                    =>  '10',
+                        'Mais de dez'           =>  'Mais de dez',
+
+                        ])
+                    ->required(),
+                Forms\Components\Select::make('shampoo')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de par de meias')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\Select::make('condicionadores')
+                ->placeholder('Selecione a quantidade')
+                ->label('Quantidade de par de meias')
+                ->options([
+                    '0'                     =>  '0',
+                    '1'                     =>  '1',
+                    '2'                     =>  '2',
+                    '3'                     =>  '3',
+                    '4'                     =>  '4',
+                    '5'                     =>  '5',
+                    '6'                     =>  '6',
+                    '7'                     =>  '7',
+                    '8'                     =>  '8',
+                    '9'                     =>  '9',
+                    '10'                    =>  '10',
+                    'Mais de dez'           =>  'Mais de dez',
+
+                    ])
+                ->required(),
+                Forms\Components\RichEditor::make('observacao_extras')
                     ->required()
                     ->maxLength(65535)
                     ->columnSpanFull(),
-            ]);
+            ])
+            ->columns(3);
     }
 
     public static function table(Table $table): Table

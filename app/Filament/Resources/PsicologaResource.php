@@ -26,6 +26,11 @@ class PsicologaResource extends Resource
 
     protected static ?string $slug = 'psicologia';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
 
 
 
