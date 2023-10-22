@@ -13,6 +13,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Paciente;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Fieldset;
 
 class CheckListResource extends Resource
 {
@@ -38,7 +40,9 @@ class CheckListResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('paciente_id')
+                Fieldset::make('Check List')
+                ->schema([
+                    Forms\Components\Select::make('paciente_id')
                     ->label('Selecione o nome do paciente')
                     ->required()
                     ->relationship('paciente' , 'primeiro_nome')
@@ -543,8 +547,8 @@ class CheckListResource extends Resource
                     ->required()
                     ->maxLength(65535)
                     ->columnSpanFull(),
-            ])
-            ->columns(3);
+            ])->columns(4)
+                ]);
     }
 
     public static function table(Table $table): Table

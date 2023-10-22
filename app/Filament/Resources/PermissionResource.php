@@ -6,6 +6,7 @@ use App\Filament\Resources\PermissionResource\Pages;
 use App\Filament\Resources\PermissionResource\RelationManagers;
 use App\Models\Permission;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -30,16 +31,21 @@ class PermissionResource extends Resource
     {
         return $form
             ->schema([
+                Fieldset::make('Adcionando Permições')
+                    ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Nome da Permissão')
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255),
-                     Forms\Components\Select::make('Roles')
+                Forms\Components\Select::make('Roles')
                     ->multiple()
                     ->relationship('roles', 'name')
                     ->multiple()
                     ->preload(),
+                    ])
+                    ->columns(2),
+
             ]);
     }
 

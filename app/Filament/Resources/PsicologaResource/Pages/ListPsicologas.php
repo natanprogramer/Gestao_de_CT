@@ -4,9 +4,9 @@ namespace App\Filament\Resources\PsicologaResource\Pages;
 
 use App\Filament\Resources\PsicologaResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\ListRecords;
 
-class ManagePsicologas extends ManageRecords
+class ListPsicologas extends ListRecords
 {
     protected static string $resource = PsicologaResource::class;
 
@@ -14,11 +14,7 @@ class ManagePsicologas extends ManageRecords
     {
         return [
             Actions\CreateAction::make()
-            ->label('Novo Atendimento'),
+            ->label('Nova Consulta'),
         ];
-    }
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
     }
 }

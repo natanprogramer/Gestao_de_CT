@@ -17,6 +17,7 @@
             <th>Presença</th>
             <th>Falta</th>
         </tr>
+
         @foreach($pacientes as $paciente)
         <tr>
             <td>{{ $paciente->primeiro_nome }} {{ $paciente->sobrenome }}</td>

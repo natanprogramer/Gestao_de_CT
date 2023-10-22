@@ -7,6 +7,7 @@ use App\Filament\Resources\FarmaciaResource\RelationManagers;
 use App\Models\Paciente;
 use App\Models\Farmacia;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -39,8 +40,9 @@ class FarmaciaResource extends Resource
     {
         return $form
             ->schema([
-
-                Forms\Components\Select::make('paciente_id')
+                Fieldset::make('Farmácia')
+                    ->schema([
+                        Forms\Components\Select::make('paciente_id')
                     ->label('Nome do paciente')
                     ->placeholder('selecione o paciente')
                     ->preload()
@@ -69,7 +71,6 @@ class FarmaciaResource extends Resource
                     ->required(),
                 Forms\Components\Textarea::make('qual_alergia')
                     ->label('Se o paciente possui alergia, diga-nos quais são')
-                    ->required()
                     ->maxLength(65535),
                 Forms\Components\FileUpload::make('upload_receita_medica')
                     ->disk('public')
@@ -121,6 +122,9 @@ class FarmaciaResource extends Resource
                     ->required()
                     ->maxLength(65535)
                     ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
             ]);
     }
 
@@ -186,4 +190,6 @@ class FarmaciaResource extends Resource
             'edit' => Pages\EditFarmacia::route('/{record}/edit'),
         ];
     }
+
+
 }

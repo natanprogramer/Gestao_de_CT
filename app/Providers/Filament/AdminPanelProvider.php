@@ -23,13 +23,23 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->sidebarCollapsibleOnDesktop(true)
             ->default()
             ->id('admin')
             ->path('dashboard')
             ->login()
+            ->brandName('Sistema de Gestão C.T')
+            // ->brandLogo(asset('images/logo.svg'))
+            // ->favicon(asset('images/favicon.png'))
             ->colors([
-                'primary' => Color::Emerald,
+                'danger' => Color::Rose,
+                'gray' => Color::Gray,
+                'info' => Color::Blue,
+                'primary' => Color::Indigo,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
             ])
+
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

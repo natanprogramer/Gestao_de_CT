@@ -7,6 +7,7 @@ use App\Filament\Resources\PsicologaResource\RelationManagers;
 use App\Models\Psicologa;
 use App\Models\Paciente;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -41,6 +42,8 @@ class PsicologaResource extends Resource
     {
         return $form
             ->schema([
+                Fieldset::make('Nova Consulta')
+                    ->schema([
                 Forms\Components\Select::make('user_id')
                     ->label('Nome do profissional')
                     ->placeholder('Selecione o profissional')
@@ -58,6 +61,9 @@ class PsicologaResource extends Resource
                     ->required()
                     ->maxLength(65535)
                     ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
             ]);
     }
 
@@ -106,7 +112,12 @@ class PsicologaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManagePsicologas::route('/'),
+            'index' => Pages\ListPsicologas::route('/'),
+            'create' => Pages\CreatePsicologa::route('/create'),
+            'view' => Pages\ViewPsicologa::route('/{record}'),
+            'edit' => Pages\EditPsicologa::route('/{record}/edit'),
+
         ];
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms\Components\Card;
 use App\Filament\Resources\PacienteResource\Pages;
 use App\Filament\Resources\PacienteResource\RelationManagers;
 use App\Models\Paciente;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
@@ -47,6 +49,9 @@ class PacienteResource extends Resource
     {
         return $form
             ->schema([
+                Fieldset::make('Triagem')
+                    ->schema([
+
                 Forms\Components\Toggle::make('status')
                 ->required(),
                 Forms\Components\Select::make('user_id')
@@ -320,6 +325,9 @@ class PacienteResource extends Resource
                 ])
                     ->required()
                     ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
             ]);
     }
 

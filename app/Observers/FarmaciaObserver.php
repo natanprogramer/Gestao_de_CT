@@ -23,10 +23,11 @@ class FarmaciaObserver
             ->actions([
                 Action::make('Saiba mais')
                 ->button()
-                ->url(route('filament.admin.resources.farmacias.view' , $farmacia->id))
-            ]);
-        //->sendToDatabase(User::all());
+                ->url(route('filament.admin.resources.farmacia.view' , $farmacia->id))
+            ])
+            ->sendToDatabase(User::all());
     }
+
 
     /**
      * Handle the Farmacia "updated" event.

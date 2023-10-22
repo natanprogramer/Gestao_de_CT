@@ -6,6 +6,7 @@ use App\Filament\Resources\RoleResource\Pages;
 use App\Filament\Resources\RoleResource\RelationManagers;
 use App\Models\Role;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -29,6 +30,8 @@ class RoleResource extends Resource
     {
         return $form
             ->schema([
+                Fieldset::make('Adcionando Regras')
+                    ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->unique(ignoreRecord: true)
@@ -40,6 +43,9 @@ class RoleResource extends Resource
                     ->label('Permissões')
                     ->multiple()
                     ->preload(),
+                    ])
+                    ->columns(2),
+
             ]);
     }
 
