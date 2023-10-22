@@ -18,4 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('contato-pdf' , [PdfPacienteController::class , 'index'])->name('contato_pdf');
-Route::get('download' , [PdfPacienteController::class , 'index'])->name('paciente.index');
+Route::get('lista-chamadas-pdf' , [PdfPacienteController::class , 'chamadas'])->name('lista_chamadas_pdf');
+

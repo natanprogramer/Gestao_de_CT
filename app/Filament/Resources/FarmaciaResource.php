@@ -26,6 +26,8 @@ class FarmaciaResource extends Resource
 
     protected static ?string $slug = 'farmacia';
 
+    protected static ?string $recordTitleAttribute = 'paciente.primeiro_nome';
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

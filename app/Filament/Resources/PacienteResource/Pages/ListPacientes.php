@@ -17,8 +17,11 @@ class ListPacientes extends ListRecords
         return [
 
             Actions\CreateAction::make()
-            ->label('Contato PDF')
+            ->label('Contatos PDF')
             ->url(route('contato_pdf')),
+            Actions\CreateAction::make()
+            ->label('Lista de Chamadas PDF')
+            ->url(route('lista_chamadas_pdf')),
             Actions\CreateAction::make()
             ->label('Novo Paciente'),
 

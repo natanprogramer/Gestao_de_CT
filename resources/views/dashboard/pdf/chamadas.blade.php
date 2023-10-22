@@ -12,16 +12,18 @@
     <table class="table table-bordered">
         <tr>
             <th>Nome do Paciente</th>
-            <th>Data do acolhimento</th>
-            <th>Responsável pelo acolhido</th>
+            <th>Responsável pelo Acolhido</th>
             <th>Telefone</th>
+            <th>Presença</th>
+            <th>Falta</th>
         </tr>
         @foreach($pacientes as $paciente)
         <tr>
             <td>{{ $paciente->primeiro_nome }} {{ $paciente->sobrenome }}</td>
-            <td>{{ $paciente->data_do_acolhimento }}</td>
-            <td>{{ $paciente->responsavel_pelo_acolhimento }} </td>
+            <td>{{ $paciente->responsavel_pelo_acolhimento }}</td>
             <td>{{ $paciente->telefone_do_responsavel }}</td>
+            <td></td>
+            <td></td>
 
         @endforeach
     </table>

@@ -26,6 +26,8 @@ class PsicologaResource extends Resource
 
     protected static ?string $slug = 'psicologia';
 
+    protected static ?string $recordTitleAttribute = 'paciente.primeiro_nome';
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

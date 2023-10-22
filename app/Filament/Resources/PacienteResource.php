@@ -34,7 +34,10 @@ class PacienteResource extends Resource
 
     protected static ?string $slug = 'pacientes';
 
+    protected static ?string $recordTitleAttribute = 'primeiro_nome';
+
     public static function getNavigationBadge(): ?string
+
     {
         return static::getModel()::count();
     }

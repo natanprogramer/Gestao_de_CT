@@ -28,6 +28,8 @@ class UserResource extends Resource
 
     protected static ?string $slug = 'equipe';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

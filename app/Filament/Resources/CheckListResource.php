@@ -26,6 +26,8 @@ class CheckListResource extends Resource
 
     protected static ?string $slug = 'checklist';
 
+    protected static ?string $recordTitleAttribute = 'paciente.primeiro_nome';
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
