@@ -6,6 +6,7 @@ use App\Filament\Resources\PacienteResource\Pages;
 use App\Filament\Resources\PacienteResource\RelationManagers;
 use App\Models\Paciente;
 use App\Models\User;
+use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -374,12 +375,17 @@ class PacienteResource extends Resource
                     ->toggleable()
                     ->dateTime()
                     ->label('Criado em')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->date('d/m/Y ')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->label('Atualizado em')
+                    ->label('Atualizado em'),
+                Tables\Columns\TextColumn::make('Download')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false)
+                    ->label('Download')
             ])
 
             ->filters([
@@ -408,6 +414,7 @@ class PacienteResource extends Resource
                 Tables\Actions\DeleteAction::make()
                 ->label('Deletar'),
             ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -424,6 +431,7 @@ class PacienteResource extends Resource
             'create' => Pages\CreatePaciente::route('/create'),
             'view' => Pages\ViewPaciente::route('/{record}'),
             'edit' => Pages\EditPaciente::route('/{record}/edit'),
+
         ];
     }
 
